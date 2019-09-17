@@ -9,8 +9,6 @@ output:
 
 ```{r}
 library(gapminder)
-library(tibble)
-library (DT)
 library(ggplot2)
 ```
 
@@ -21,6 +19,7 @@ nrow(gapminder)
 ```
 
 ```{r}
+range(gapminder$lifeExp)
 mean(gapminder$lifeExp)
 ```
 
@@ -28,8 +27,9 @@ mean(gapminder$lifeExp)
 
 ## A boxplot of life expectancy by year
 ```{r}
-ggplot(gapminder, aes(year,lifeExp, group=year))+
+ggplot(gapminder, aes(year, lifeExp, group = year))+
   geom_boxplot()+
+  labs(x ="Year", y ="Life expectancy")+
   theme_classic()
 ```
 
