@@ -3,7 +3,16 @@
 ### This is a repo that encompasses homework as well as all that is learnt in STAT 545, i.e. useful tools for Git, GitHub and RStudio.
 *__A brief about me:__ I moved to Vancouver from Tasmania, Australia in May 2019. I'm studying my MSc in geography, focusing on the effects of land use and climate change on carbon cycling in wetlands. More generally I'm interested in climate change and other anthropogenic effects on ecosystem processes. Hobbies include hiking, generally just being outdoors, cooking!*
 
+## Homework
+- [x] [Assignment 1](https://github.com/mnybe1/STAT545-participation/blob/master/README.md)
 
+- [ ] Assignment 2
+
+- [ ] Assignment 3
+
+- [ ] Assignment 4
+
+- [ ] Assignment 5
 
 ## Class guide
 ### *Links to participation repository*
@@ -16,16 +25,7 @@ Intro to plotting with ggplot
 * [Github markdown cheat sheat](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
 * [RStudio markdown cheat sheat](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 
-## Homework
-- [x] [Assignment 1](https://github.com/mnybe1/STAT545-participation/blob/master/README.md)
 
-- [ ] Assignment 2
-
-- [ ] Assignment 3
-
-- [ ] Assignment 4
-
-- [ ] Assignment 5
 
 
 
