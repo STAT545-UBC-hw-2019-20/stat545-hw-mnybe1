@@ -1,29 +1,29 @@
 ---
-title: "An exploration of the gapminder dataset"
-output: github_document 
+title: "Homework week 1 slides"
+output: ioslides_presentation
 
 ---
 
-```{r}
+
+```{r, echo=FALSE}
 library(gapminder)
 library(ggplot2)
 ```
 
 ## A summary of the dataset
-```{r}
+```{r, echo=FALSE}
 summary(gapminder)
-nrow(gapminder)
 ```
 
-```{r}
-range(gapminder$lifeExp)
+## Mean life expectancy and age range
+```{r, echo=FALSE}
 mean(gapminder$lifeExp)
+range(gapminder$lifeExp)
 ```
-
 
 
 ## A boxplot of life expectancy by year
-```{r}
+```{r, echo=FALSE}
 ggplot(gapminder, aes(year, lifeExp, group = year))+
   geom_boxplot()+
   labs(x ="Year", y ="Life expectancy")+
