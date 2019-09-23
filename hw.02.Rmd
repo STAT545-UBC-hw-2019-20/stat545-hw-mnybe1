@@ -48,3 +48,9 @@ gapminder %>%
   theme_bw()
 ```
 
+## EX 2 Exploring country and population
+```{r}
+gapminder %>%
+  select(country, pop)
+  
+```
