@@ -7,3 +7,44 @@ library(gapminder)
 library(dplyr)
 library(ggplot2)
 ```
+
+## EX 1.1 Canada, Belgium and Bangladesh in the 1970s
+```{r}
+gapminder %>%
+  filter(year >= "1970" & year < "1980") %>%
+  filter(country == "Canada" | country == "Belgium" | country == "Bangladesh")
+```
+
+## 1.2 Above with only country and gdpPercap
+```{r}
+gapminder %>%
+  filter(year >= "1970" & year < "1980") %>%
+  filter(country == "Canada" | country == "Belgium" | country == "Bangladesh")%>%
+  select(country, gdpPercap)
+```
+
+## 1.3 All entries with a drop in life expectancy
+```{r}
+gapminder %>%
+  mutate(life.inc = c(NA, diff(lifeExp, lag = 1))) %>%
+  filter(life.inc < 0)
+```
+
+## 1.4 Max GDP experienced per country
+```{r}
+gapminder %>%
+  group_by(country) %>%
+  summarise(max.gdp = max(gdpPercap))
+```
+
+## 1.5 Scatter plot of Canada's life expectancy vs. GDP per capita
+```{r}
+gapminder %>%
+  filter(country == "Canada") %>%
+  ggplot(., aes(gdpPercap, lifeExp))+
+           geom_point()+
+  scale_x_log10("GDP per capita", labels = scales::dollar_format())+
+  ylab("Life expectancy")+
+  theme_bw()
+```
+
