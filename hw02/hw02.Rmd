@@ -7,15 +7,21 @@ output: html_document
 library(gapminder)
 library(dplyr)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1bf4f1d2d7551555659a7947320ac9a79b9f6b96
 library(ggplot2)
 ```
 
 ## EX 1.1 Canada, Belgium and Bangladesh in the 1970s
+<<<<<<< HEAD
 =======
 ```
 
 ## 1.1 Canada, Belgium and Bangladesh in the 1970s
 >>>>>>> a66da7f32ddbc6771cdd1d2d4e7996fb41aea568
+=======
+>>>>>>> 1bf4f1d2d7551555659a7947320ac9a79b9f6b96
 ```{r}
 gapminder %>%
   filter(year >= "1970" & year < "1980") %>%
@@ -35,10 +41,15 @@ gapminder %>%
 ```{r}
 gapminder %>%
 <<<<<<< HEAD
+<<<<<<< HEAD
   mutate(life.inc = c(NA, diff(lifeExp, lag = 1))) %>%
   filter(life.inc < 0)
 =======
 >>>>>>> a66da7f32ddbc6771cdd1d2d4e7996fb41aea568
+=======
+  mutate(life.inc = c(NA, diff(lifeExp, lag = 1))) %>%
+  filter(life.inc < 0)
+>>>>>>> 1bf4f1d2d7551555659a7947320ac9a79b9f6b96
 
 ```
 
@@ -47,6 +58,9 @@ gapminder %>%
 gapminder %>%
   group_by(country) %>%
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1bf4f1d2d7551555659a7947320ac9a79b9f6b96
   summarise(max.gdp = max(gdpPercap))
   
 ```
@@ -79,6 +93,7 @@ ggplot(trees, aes(Girth, Volume))+
 ggplot(trees, a)
 ```
 
+<<<<<<< HEAD
 =======
   mutate(maxGDP.country = max(gdpPercap))
 
@@ -90,3 +105,5 @@ gapminder %>%
 
 ## 1.5 
 >>>>>>> a66da7f32ddbc6771cdd1d2d4e7996fb41aea568
+=======
+>>>>>>> 1bf4f1d2d7551555659a7947320ac9a79b9f6b96
