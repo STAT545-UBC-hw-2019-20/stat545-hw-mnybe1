@@ -49,18 +49,35 @@ gapminder %>%
 ```
 
 ## EX 2 Exploring country and population
-### Summary table of countries min, mean and max populations over the 12 year data collection period
 ```{r}
 gapminder %>%
-  select(country,pop)%>%
-  group_by(country)%>%
-  summarise(n(), 
-            mean.pop = mean(pop),
-            min.pop = min(pop),
-            max.pop = max(pop))
+  select(continent,lifeExp)%>%
+  group_by(continent)%>%
+  summarise(n.countries = n(), 
+            mean.lifeExp = mean(lifeExp),
+            min.lifeExp = min(lifeExp),
+            max.lifeExp = max(lifeExp))
+  
+gapminder %>%
+  select(continent, lifeExp) %>%
+  group_by(continent)%>%
+  summarise(n.countries =n())%>%
+  glimpse()
 ```
-###
-```{r}
 
+## EX 3 Explore various plot types
+### Scatter plot of 
+```{r}
+gapminder %>%
+  filter(country =="Australia" | country == "China"  | country == "Japan" | country =="Indonesia") %>%
+  ggplot(., aes(gdpPercap, pop, group=country))+
+  scale_x_continuous("GDP per capita", labels = scales::dollar_format())+
+  ylab("Population")+
+  geom_point(aes(color=country))+
+  theme_bw()
 ```
+
+
+
+
 
