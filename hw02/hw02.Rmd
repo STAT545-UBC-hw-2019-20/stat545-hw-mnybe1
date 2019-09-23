@@ -6,7 +6,6 @@ output: html_document
 ```{r}
 library(gapminder)
 library(dplyr)
-<<<<<<< HEAD
 library(ggplot2)
 ```
 
@@ -15,7 +14,6 @@ library(ggplot2)
 ```
 
 ## 1.1 Canada, Belgium and Bangladesh in the 1970s
->>>>>>> a66da7f32ddbc6771cdd1d2d4e7996fb41aea568
 ```{r}
 gapminder %>%
   filter(year >= "1970" & year < "1980") %>%
@@ -34,19 +32,14 @@ gapminder %>%
 ## 1.3 All entries with a drop in life expectancy
 ```{r}
 gapminder %>%
-<<<<<<< HEAD
   mutate(life.inc = c(NA, diff(lifeExp, lag = 1))) %>%
   filter(life.inc < 0)
-=======
->>>>>>> a66da7f32ddbc6771cdd1d2d4e7996fb41aea568
-
 ```
 
 ## 1.4 Max GDP experienced per country
 ```{r}
 gapminder %>%
   group_by(country) %>%
-<<<<<<< HEAD
   summarise(max.gdp = max(gdpPercap))
   
 ```
@@ -75,18 +68,7 @@ ggplot(trees, aes(Girth, Volume))+
   geom_point()+
   theme_classic()
 ```
-```{r}
-ggplot(trees, a)
-```
 
-=======
-  mutate(maxGDP.country = max(gdpPercap))
-
-gapminder %>%
-  group_by(country) %>%
-  summarise(max.gdp = max(gdpPercap))
-  
-```
 
 ## 1.5 
 >>>>>>> a66da7f32ddbc6771cdd1d2d4e7996fb41aea568
