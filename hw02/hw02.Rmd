@@ -10,6 +10,10 @@ library(ggplot2)
 ```
 
 ## EX 1.1 Canada, Belgium and Bangladesh in the 1970s
+=======
+```
+
+## 1.1 Canada, Belgium and Bangladesh in the 1970s
 ```{r}
 gapminder %>%
   filter(year >= "1970" & year < "1980") %>%
@@ -30,7 +34,6 @@ gapminder %>%
 gapminder %>%
   mutate(life.inc = c(NA, diff(lifeExp, lag = 1))) %>%
   filter(life.inc < 0)
-
 ```
 
 ## 1.4 Max GDP experienced per country
@@ -65,7 +68,6 @@ ggplot(trees, aes(Girth, Volume))+
   geom_point()+
   theme_classic()
 ```
-```{r}
-ggplot(trees, a)
-```
+
+
 
