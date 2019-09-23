@@ -49,8 +49,18 @@ gapminder %>%
 ```
 
 ## EX 2 Exploring country and population
+### Summary table of countries min, mean and max populations over the 12 year data collection period
 ```{r}
 gapminder %>%
-  select(country, pop)
-  
+  select(country,pop)%>%
+  group_by(country)%>%
+  summarise(n(), 
+            mean.pop = mean(pop),
+            min.pop = min(pop),
+            max.pop = max(pop))
 ```
+###
+```{r}
+
+```
+
