@@ -1,0 +1,9 @@
+---
+title: "hw.02"
+output: html_document
+---
+```{r}
+library(gapminder)
+library(dplyr)
+library(ggplot2)
+```
