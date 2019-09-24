@@ -66,15 +66,26 @@ gapminder %>%
 ```
 
 ## EX 3 Explore various plot types
-### Scatter plot of 
+### Scatter plot of population and GDP per capita for Australia, China, Japan and India
 ```{r}
 gapminder %>%
-  filter(country =="Australia" | country == "China"  | country == "Japan" | country =="Indonesia") %>%
+  filter(country =="Australia" | country == "China"  | country == "Canada" | country == "India" ) %>%
   ggplot(., aes(gdpPercap, pop, group=country))+
   scale_x_continuous("GDP per capita", labels = scales::dollar_format())+
   ylab("Population")+
   geom_point(aes(color=country))+
   theme_bw()
+```
+
+##
+```{r}
+gapminder %>%
+  filter(country =="Australia" | country == "China"  | country == "Canada" | country == "India" ) %>%
+  ggplot(., aes(year, gdpPercap))+
+  scale_y_log10()+
+  geom_line(aes(color=country))+
+  facet_wrap(~country)+
+  theme_classic()
 ```
 
 
