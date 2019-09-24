@@ -2,45 +2,50 @@
 title: "Exploring the gapminder dataset"
 output: html_document
 ---
-```{r}
+```{r, echo=FALSE}
 library(gapminder)
 library(dplyr)
 library(ggplot2)
 ```
 
-## EX 1.1 Canada, Belgium and Bangladesh in the 1970s
+## _Basic dplyr_
+### 1.1 Canada, Belgium and Bangladesh in the 1970s
 ```{r, echo=FALSE}
 gapminder %>%
   filter(year >= "1970" & year < "1980") %>%
-  filter(country == "Canada" | country == "Belgium" | country == "Bangladesh")
+  filter(country == "Canada" | country == "Belgium" | country == "Bangladesh") %>%
+  knitr::kable()
 ```
 
-## 1.2 Previous figure with only country and gdpPercap
+### 1.2 Previous figure with only country and gdpPercap
 ```{r, echo=FALSE}
 gapminder %>%
   filter(year >= "1970" & year < "1980") %>%
   filter(country == "Canada" | country == "Belgium" | country == "Bangladesh")%>%
-  select(country, gdpPercap)
+  select(country, gdpPercap) %>%
+  knitr::kable()
 ```
 
-## 1.3 All entries with a drop in life expectancy
-### I"ve left the code in here because this seems a bit more complicated
+### 1.3 All entries with a drop in life expectancy
 <!-- Lag allows you to calculate running differences between observations -->
-```{r}
+```{r, echo=FALSE}
 gapminder %>%
-  mutate(life.inc = c(NA, diff(lifeExp, lag = 1))) %>%
-  filter(life.inc < 0)
+  arrange(year) %>%
+  mutate(life.inc = lifeExp - lag(lifeExp)) %>%
+  filter(life.inc <0) %>%
+  DT::datatable()
 ```
 
-## 1.4 Max GDP experienced per country
+### 1.4 Max GDP experienced per country
 ```{r, echo=FALSE}
 gapminder %>%
   group_by(country) %>%
-  summarise(max.gdp = max(gdpPercap))
+  summarise(max.gdp = max(gdpPercap))%>%
+  DT::datatable()
 ```
 
-## 1.5 Scatter plot of Canada's life expectancy vs. GDP per capita
-```{r}
+### 1.5 Scatter plot of Canada's life expectancy vs. GDP per capita
+```{r, echo=FALSE}
 gapminder %>%
   filter(country == "Canada") %>%
   ggplot(., aes(gdpPercap, lifeExp))+
@@ -50,26 +55,29 @@ gapminder %>%
   theme_classic()
 ```
 
-## EX 2 Exploring year and life expectancy 
-### Simple summary statistics of year (categorical variable) and life expectancy (quantitative variable)
-```{r}
+
+##  _2 Exploring year and life expectancy_ 
+### Simple summary statistics of continent (categorical variable) and life expectancy (quantitative variable)
+```{r, echo=FALSE}
 gapminder %>%
   select(continent, lifeExp)%>%
   summary()
 ```
 
-### Mean, max. and min. life expectancy by year and continent
-```{r}
+### The number of countries per continent and, mean, max. and min. life expectancy for each continent 
+```{r, echo=FALSE}
 gapminder %>%
-  select(lifeExp, year, continent) %>%
-  group_by(continent, year) %>%
-  summarise(yearly.maxLE = max(lifeExp),
+  select(lifeExp,continent) %>%
+  group_by(continent) %>%
+  summarise(n.of.countries = n(),
+            yearly.maxLE = max(lifeExp),
             yearly.meanLE = mean(lifeExp),
-            yearly.minLE = min(lifeExp))
+            yearly.minLE = min(lifeExp))%>%
+  knitr::kable()
 ```
 
-### Line graph depicting increase in life expectancy in each continent over time. Grey areas are standard error
-```{r}
+### Line graph depicting the increase in life expectancy in each continent over time. Grey areas are standard error
+```{r, echo=FALSE}
 gapminder %>%
   select(year, lifeExp, continent) %>%
   ggplot(., aes(year, lifeExp, group = continent))+
@@ -80,9 +88,7 @@ gapminder %>%
 ```
 
 
-
-
-## EX 3 Explore various plot types
+## _3 Explore various plot types_
 ### Scatter plot of population and GDP per capita for Australia, China, Japan and India
 ```{r, echo=FALSE}
 gapminder %>%
@@ -95,7 +101,7 @@ gapminder %>%
   theme_classic()
 ```
 
-##
+## Growth of GDP per capita over time 
 ```{r, echo=FALSE}
 gapminder %>%
   filter(country =="Australia" | country == "China"  | country == "Canada" | country == "India" ) %>%
@@ -104,10 +110,9 @@ gapminder %>%
   geom_line(aes(color=country))+
   facet_wrap(~country)+
   xlab("Year")+
-  ggtitle("Growth of GDP per capita over time")
+  ggtitle("Growth of GDP per capita over time")+
   theme_classic()
 ```
-
 
 
 
