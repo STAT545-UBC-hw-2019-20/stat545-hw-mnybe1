@@ -1,5 +1,5 @@
 ---
-title: "hw.02"
+title: "Exploring the gapminder dataset"
 output: html_document
 ---
 ```{r}
@@ -9,14 +9,14 @@ library(ggplot2)
 ```
 
 ## EX 1.1 Canada, Belgium and Bangladesh in the 1970s
-```{r}
+```{r, echo=FALSE}
 gapminder %>%
   filter(year >= "1970" & year < "1980") %>%
   filter(country == "Canada" | country == "Belgium" | country == "Bangladesh")
 ```
 
-## 1.2 Above with only country and gdpPercap
-```{r}
+## 1.2 Previous figure with only country and gdpPercap
+```{r, echo=FALSE}
 gapminder %>%
   filter(year >= "1970" & year < "1980") %>%
   filter(country == "Canada" | country == "Belgium" | country == "Bangladesh")%>%
@@ -24,6 +24,8 @@ gapminder %>%
 ```
 
 ## 1.3 All entries with a drop in life expectancy
+### I"ve left the code in here because this seems a bit more complicated
+<!-- Lag allows you to calculate running differences between observations -->
 ```{r}
 gapminder %>%
   mutate(life.inc = c(NA, diff(lifeExp, lag = 1))) %>%
@@ -31,7 +33,7 @@ gapminder %>%
 ```
 
 ## 1.4 Max GDP experienced per country
-```{r}
+```{r, echo=FALSE}
 gapminder %>%
   group_by(country) %>%
   summarise(max.gdp = max(gdpPercap))
@@ -44,47 +46,65 @@ gapminder %>%
   ggplot(., aes(gdpPercap, lifeExp))+
            geom_point()+
   scale_x_log10("GDP per capita", labels = scales::dollar_format())+
-  ylab("Life expectancy")+
-  theme_bw()
+  ylab("Life expectancy (years)")+
+  theme_classic()
 ```
 
-## EX 2 Exploring country and population
+## EX 2 Exploring year and life expectancy 
+### Simple summary statistics of year (categorical variable) and life expectancy (quantitative variable)
 ```{r}
 gapminder %>%
-  select(continent,lifeExp)%>%
-  group_by(continent)%>%
-  summarise(n.countries = n(), 
-            mean.lifeExp = mean(lifeExp),
-            min.lifeExp = min(lifeExp),
-            max.lifeExp = max(lifeExp))
-  
-gapminder %>%
-  select(continent, lifeExp) %>%
-  group_by(continent)%>%
-  summarise(n.countries =n())%>%
-  glimpse()
+  select(continent, lifeExp)%>%
+  summary()
 ```
+
+### Mean, max. and min. life expectancy by year and continent
+```{r}
+gapminder %>%
+  select(lifeExp, year, continent) %>%
+  group_by(continent, year) %>%
+  summarise(yearly.maxLE = max(lifeExp),
+            yearly.meanLE = mean(lifeExp),
+            yearly.minLE = min(lifeExp))
+```
+
+### Line graph depicting increase in life expectancy in each continent over time. Grey areas are standard error
+```{r}
+gapminder %>%
+  select(year, lifeExp, continent) %>%
+  ggplot(., aes(year, lifeExp, group = continent))+
+           geom_smooth(method = "loess", aes(color = continent))+
+  labs(title = "Growth in life expectancy over time by continent", x = "Year", y = "Life expectancy (years)")+
+  theme_bw()
+      
+```
+
+
+
 
 ## EX 3 Explore various plot types
 ### Scatter plot of population and GDP per capita for Australia, China, Japan and India
-```{r}
+```{r, echo=FALSE}
 gapminder %>%
   filter(country =="Australia" | country == "China"  | country == "Canada" | country == "India" ) %>%
   ggplot(., aes(gdpPercap, pop, group=country))+
   scale_x_continuous("GDP per capita", labels = scales::dollar_format())+
   ylab("Population")+
   geom_point(aes(color=country))+
-  theme_bw()
+  geom_line(aes(color=country))+
+  theme_classic()
 ```
 
 ##
-```{r}
+```{r, echo=FALSE}
 gapminder %>%
   filter(country =="Australia" | country == "China"  | country == "Canada" | country == "India" ) %>%
   ggplot(., aes(year, gdpPercap))+
-  scale_y_log10()+
+  scale_y_log10("GDP per capita", labels = scales::dollar_format())+
   geom_line(aes(color=country))+
   facet_wrap(~country)+
+  xlab("Year")+
+  ggtitle("Growth of GDP per capita over time")
   theme_classic()
 ```
 
