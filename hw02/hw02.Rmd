@@ -1,6 +1,7 @@
 ---
 title: "Exploring the gapminder dataset"
-output: html_document
+output:
+  html_document: default
 ---
 ```{r, echo=FALSE}
 library(gapminder)
