@@ -8,20 +8,56 @@ library(gapminder)
 library(tidyverse)
 ```
 
-##Task option 2
+##Task option 3 - The spread of GDP within the continents.
 #A tibble
 <!-- -->
 ```{r}
+gapminder %>%
+  select(gdpPercap, continent, country) %>%
+  group_by(country, continent) %>%
+  summarise(minGDP = min(gdpPercap),
+            maxGDP = max(gdpPercap),
+            meanGDP = mean(gdpPercap)) %>%
+  mutate(GDPdiff = maxGDP - minGDP)
+
 ```
 
 #A plot from the tibble
 <!-- -->
 ```{r}
+gapminder %>%
+  select(gdpPercap, continent, country) %>%
+  group_by(country, continent) %>%
+  summarise(minGDP = min(gdpPercap),
+            maxGDP = max(gdpPercap),
+            meanGDP = mean(gdpPercap)) %>%
+  mutate(GDPdiff = maxGDP - minGDP) %>%
+  ggplot(., aes(meanGDP, continent))+
+  ggridges::geom_density_ridges()
+
+```
+
+#What this figure/table show
+<!-- -->
+The table/figure show the difference in max and min GDP for countries in each country. 
+
+##Task option 5
+#A tibble
+<!-- -->
+```{r}
+
+```
+
+#A plot from the tibble
+<!-- -->
+```{r}
+
 ```
 
 #What this figure/table show
 <!-- -->
 ```{r}
+
 ```
 
 
@@ -29,14 +65,18 @@ library(tidyverse)
 #A tibble
 <!-- -->
 ```{r}
+
 ```
 
 #A plot from the tibble
 <!-- -->
 ```{r}
+
 ```
 
 #What this figure/table show
 <!-- -->
 ```{r}
+
 ```
+
