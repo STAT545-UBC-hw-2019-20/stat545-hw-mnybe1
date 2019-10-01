@@ -10,17 +10,17 @@ library(tidyverse)
 
 ##Task option 3 - The spread of GDP within the continents.
 #A tibble
-Table 1
+*Table 1*
 <!--Use summarise to calculate summary statistics, i.e. min, mean and max, and mutate to calculate a new variable that is the difference between the min and max GDP in each country-->
 ```{r}
+
 (GDP.tib <- gapminder %>% 
   select(gdpPercap, continent, country) %>%
   group_by(continent,country) %>%
   summarise(minGDP = min(gdpPercap),
             maxGDP = max(gdpPercap),
             meanGDP = mean(gdpPercap)) %>%
-  mutate(GDPdiff = maxGDP - minGDP))
-
+   mutate(GDPdiff = maxGDP - minGDP))
 ```
 
 #A plot from the tibble
@@ -34,43 +34,48 @@ ggplot(GDP.tib, aes(continent, meanGDP))+
   theme_bw()+
   theme(legend.position = "none")
 ```
-Figure 1
+*Figure 1*
 
 #What this figure/table show
 _Table 1_ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. _Figure 1_ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
 
 ##Task option 5 - How is life expectancy changing over time on different continents
 #A tibble
-<!-- -->
+<!--This is very simple but all I needed to make a plot-->
+*Table 2*
 ```{r}
 (lifeExp <- gapminder %>% select(country,continent,lifeExp,year)) 
 ```
 
 #A plot from the tibble
-<!-- -->
+<!--Geom_smooth fits a line between points (using the default method 'loess', which can be specified) and the grey area indicates 95% CI (can change this level)-->
 ```{r}
-ggplot(lifeExp, aes(year,lifeExp, group=continent)) + geom_smooth(aes(color=continent)) + theme_bw()
+ggplot(lifeExp, aes(year,lifeExp, group=continent)) + 
+  geom_smooth(aes(colour=continent)) + 
+  labs(x = "Year", y = "Life expectancy (years)", colour = "Continent")+
+  theme_bw()
 ```
+*Figure 2*
 
 #What this figure/table show
-<!-- -->
-```{r}
-gapmin
-```
+_Table 2_ simply shows the life expectancy per year in each country. _Figure 2_ then plots this data, fitting a line through the countries within each continent (grey areas indicate 0.95 confidence level). In addition to showing the increasing trend of life expectancy over time in all continents, it indicates there is a clear difference between the life expectancies between continents.
 
 
 ##Task option 6 - A country with an interesting story 
 #A tibble
-<!-- -->
+<!--To find a country with an interesting story I plotted the data first, then went on to make a tibble-->
 ```{r}
-ggplot(gapminder, aes(year, pop,group=continent)) + geom_jitter()
-gapminder %>% filter(pop>250000000)
+(ggplot(gapminder, aes(year, pop,group=continent)) + geom_jitter()) #To quickly explore the dataframe. 2 countries are clear outliers in this dataframe. 
+
+(China <- gapminder %>% filter(pop>250000000 | pop<1500000) %>%
+  filter(country == "China"))
 ```
 
 #A plot from the tibble
 <!-- -->
 ```{r}
-
+ggplot(China, aes(year, pop))+
+  geom_point(aes(size=gdpPercap))
 ```
 
 #What this figure/table show
