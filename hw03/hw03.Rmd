@@ -12,60 +12,54 @@ library(tidyverse)
 #A tibble
 <!-- -->
 ```{r}
-gapminder %>%
+tibble <- gapminder %>% 
   select(gdpPercap, continent, country) %>%
-  group_by(country, continent) %>%
+  group_by(continent,country) %>%
   summarise(minGDP = min(gdpPercap),
             maxGDP = max(gdpPercap),
             meanGDP = mean(gdpPercap)) %>%
   mutate(GDPdiff = maxGDP - minGDP)
-
+tibble
 ```
 
 #A plot from the tibble
 <!-- -->
 ```{r}
-gapminder %>%
-  select(gdpPercap, continent, country) %>%
-  group_by(country, continent) %>%
-  summarise(minGDP = min(gdpPercap),
-            maxGDP = max(gdpPercap),
-            meanGDP = mean(gdpPercap)) %>%
-  mutate(GDPdiff = maxGDP - minGDP) %>%
-  ggplot(., aes(meanGDP, continent))+
-  ggridges::geom_density_ridges()
-
+ggplot(tibble) + geom_jitter(aes(continent, meanGDP, color = continent)) + 
+  labs(title="GDP per Capita of countries")
+  theme_bw() +
+  theme(legend.position="none")  
 ```
 
 #What this figure/table show
 <!-- -->
-The table/figure show the difference in max and min GDP for countries in each country. 
 
-##Task option 5
+##Task option 5 - How is life expectancy changing over time on different continents
 #A tibble
 <!-- -->
 ```{r}
-
+(lifeExp <- gapminder %>% select(country,continent,lifeExp,year)) 
 ```
 
 #A plot from the tibble
 <!-- -->
 ```{r}
-
+ggplot(lifeExp, aes(year,lifeExp, group=continent)) + geom_smooth(aes(color=continent)) + theme_bw()
 ```
 
 #What this figure/table show
 <!-- -->
 ```{r}
-
+gapmin
 ```
 
 
-##Task option 6
+##Task option 6 - A country with an interesting story 
 #A tibble
 <!-- -->
 ```{r}
-
+ggplot(gapminder, aes(year, pop,group=continent)) + geom_jitter()
+gapminder %>% filter(pop>250000000)
 ```
 
 #A plot from the tibble
