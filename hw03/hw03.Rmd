@@ -1,6 +1,7 @@
 ---
-title: "hw03"
-output: html_document
+title: "hw03 - dplyr/ggplot II"
+output: 
+  html_document: default
 ---
 
 ```{r, echo=FALSE}
@@ -22,9 +23,10 @@ library(tidyverse)
    mutate(GDPdiff = maxGDP - minGDP))
 ```
 
-#A plot from the tibble
 
-```{r, echo=FALSE}
+#A plot from the tibble
+The spread of GDP within the continents, as shown by plotting the mean GDP value for each country
+```{r}
 ggplot(GDP.tib, aes(continent, meanGDP))+
   geom_jitter(aes(colour = continent))+
   ggtitle("Spread of GDP within the continents")+
