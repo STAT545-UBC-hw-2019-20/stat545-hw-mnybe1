@@ -39,6 +39,7 @@ ggplot(GDP.tib, aes(continent, meanGDP))+
 #What this figure/table show
 _Table 1_ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. _Figure 1_ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
 
+
 ##Task option 5 - How is life expectancy changing over time on different continents
 #A tibble
 <!--This is very simple but all I needed to make a plot-->
@@ -65,17 +66,24 @@ _Table 2_ simply shows the life expectancy per year in each country. _Figure 2_ 
 #A tibble
 <!--To find a country with an interesting story I plotted the data first, then went on to make a tibble-->
 ```{r}
-(ggplot(gapminder, aes(year, pop,group=continent)) + geom_jitter()) #To quickly explore the dataframe. 2 countries are clear outliers in this dataframe. 
+(ggplot(gapminder, aes(year, gdpPercap)) + geom_jitter()) #To quickly explore the dataframe. There are some clear outliers here
 
-(China <- gapminder %>% filter(pop>250000000 | pop<1500000) %>%
-  filter(country == "China"))
+gapminder %>% 
+    filter(gdpPercap > 75000)#Kuwait has the highest GDP per capita from 1952-1972, but happens after?
+
+(Kuwait <- gapminder %>%
+  filter(country == "Kuwait")
+
 ```
 
 #A plot from the tibble
 <!-- -->
 ```{r}
-ggplot(China, aes(year, pop))+
-  geom_point(aes(size=gdpPercap))
+ggplot(Kuwait, aes(year, gdpPercap))+
+  geom_line()+
+  scale_y_continuous("GDP per capita", labels = scales::dollar_format())+
+  xlab("Year")+
+  theme_bw()
 ```
 
 #What this figure/table show
