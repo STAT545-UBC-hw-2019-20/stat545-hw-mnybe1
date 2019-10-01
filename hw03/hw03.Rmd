@@ -12,19 +12,68 @@ library(tidyverse)
 #A tibble
 *Table 1. The spread of GDP within continents. For each country, min, max, mean and the difference between the minimum and maxiumum values has been calculated*
 <!--Use summarise to calculate summary statistics, i.e. min, mean and max, and mutate to calculate a new variable that is the difference between the min and max GDP in each country-->
+<<<<<<< HEAD
 ```{r, echo=FALSE}
 (GDP.tib <- gapminder %>% 
+=======
+```{r}
+<<<<<<< HEAD
+
+(GDP.tib <- gapminder %>% 
+=======
+<<<<<<< HEAD
+
+(GDP.tib <- gapminder %>% 
+=======
+<<<<<<< HEAD
+(GDP.tib <- gapminder %>% 
+=======
+tibble <- gapminder %>% 
+>>>>>>> ef17f92197b692bfd6407c79a4f8edba4edb23dd
+>>>>>>> cb58868971723819744d36ba800aca98e8c29e99
+>>>>>>> d938a5737b7d60fe83681a1780bc16728ab322f1
+>>>>>>> ce990f7d2459559140119f6ddaa80f1e467b0b28
   select(gdpPercap, continent, country) %>%
   group_by(continent,country) %>%
   summarise(minGDP = min(gdpPercap),
             maxGDP = max(gdpPercap),
             meanGDP = mean(gdpPercap)) %>%
+<<<<<<< HEAD
    mutate(GDPdiff = maxGDP - minGDP))
 ```
 
 #A plot from the tibble
 
 ```{r, echo=FALSE}
+=======
+<<<<<<< HEAD
+   mutate(GDPdiff = maxGDP - minGDP))
+=======
+<<<<<<< HEAD
+   mutate(GDPdiff = maxGDP - minGDP))
+=======
+<<<<<<< HEAD
+  mutate(GDPdiff = maxGDP - minGDP))
+
+=======
+  mutate(GDPdiff = maxGDP - minGDP)
+tibble
+>>>>>>> ef17f92197b692bfd6407c79a4f8edba4edb23dd
+>>>>>>> cb58868971723819744d36ba800aca98e8c29e99
+>>>>>>> d938a5737b7d60fe83681a1780bc16728ab322f1
+```
+
+#A plot from the tibble
+The spread of GDP within the continents, as shown by plotting the mean GDP value for each country
+```{r}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> cb58868971723819744d36ba800aca98e8c29e99
+>>>>>>> d938a5737b7d60fe83681a1780bc16728ab322f1
+>>>>>>> ce990f7d2459559140119f6ddaa80f1e467b0b28
 ggplot(GDP.tib, aes(continent, meanGDP))+
   geom_jitter(aes(colour = continent))+
   ggtitle("Spread of GDP within the continents")+
@@ -32,12 +81,44 @@ ggplot(GDP.tib, aes(continent, meanGDP))+
   scale_y_continuous("Mean GDP",label =  scales::dollar_format())+
   theme_bw()+
   theme(legend.position = "none")
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+ggplot(tibble) + geom_jitter(aes(continent, meanGDP, color = continent)) + 
+  labs(title="GDP per Capita of countries")
+  theme_bw() +
+  theme(legend.position="none")  
+>>>>>>> ef17f92197b692bfd6407c79a4f8edba4edb23dd
+>>>>>>> cb58868971723819744d36ba800aca98e8c29e99
+>>>>>>> d938a5737b7d60fe83681a1780bc16728ab322f1
+>>>>>>> ce990f7d2459559140119f6ddaa80f1e467b0b28
 ```
 *Figure 1. The spread of GDP within the continents, as shown by plotting the mean GDP value for each country*
 
 #What this figure/table show
+<<<<<<< HEAD
 _Table 1_ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. _Figure 1_ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
 
+=======
+<<<<<<< HEAD
+_Table 1_ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. _Figure 1_ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
+
+=======
+<<<<<<< HEAD
+_Table 1_ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. _Figure 1_ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
+=======
+<<<<<<< HEAD
+_Table 1_ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. _Figure 1_ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
+=======
+<!-- -->
+>>>>>>> ef17f92197b692bfd6407c79a4f8edba4edb23dd
+>>>>>>> cb58868971723819744d36ba800aca98e8c29e99
+>>>>>>> d938a5737b7d60fe83681a1780bc16728ab322f1
+>>>>>>> ce990f7d2459559140119f6ddaa80f1e467b0b28
 
 ##Task option 5 - How is life expectancy changing over time on different continents
 #A tibble
