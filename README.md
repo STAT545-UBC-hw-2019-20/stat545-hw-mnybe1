@@ -9,9 +9,9 @@
 2. [Gapminder exploration](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-mnybe1/blob/master/hw01/hw01_gapminder.Rmd)
 3. [Slides](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-mnybe1/blob/master/hw01/hw01%20slides.Rmd)
 
-- [ ] Assignment 2
+- [x] Assignment 2
 
-- [ ] Assignment 3
+- [x] [Assignment 3](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-mnybe1/tree/master/hw03/hw03_dplyrggplot.html)
 
 - [ ] Assignment 4
 
