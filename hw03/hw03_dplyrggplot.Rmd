@@ -1,0 +1,123 @@
+---
+title: "HW03 - dplyr/ggplot II"
+output: 
+  html_document: default
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(gapminder)
+library(tidyverse)
+```
+
+# Task option 3 - The spread of GDP within the continents.
+## A tibble
+
+*Table 1.* The spread of GDP within continents. For each country, the min, max, mean and the difference between the minimum and maxiumum values has been calculated
+
+<!--Use summarise to calculate summary statistics, i.e. min, mean and max, and mutate to calculate a new variable that is the difference between the min and max GDP in each country-->
+```{r, echo=FALSE}
+(GDP.tib <- gapminder %>% 
+  select(gdpPercap, continent, country) %>%
+  group_by(continent,country) %>%
+  summarise(minGDP = min(gdpPercap),
+            maxGDP = max(gdpPercap),
+            meanGDP = mean(gdpPercap)) %>%
+   mutate(GDPdiff = maxGDP - minGDP))
+```
+
+## A plot from the tibble
+
+The spread of GDP within the continents, as shown by plotting the mean GDP value for each country
+```{r, echo=FALSE}
+ggplot(GDP.tib, aes(continent, meanGDP))+
+  geom_jitter(aes(colour = continent))+
+  ggtitle("Spread of GDP within the continents")+
+  xlab("Continent")+
+  scale_y_continuous("Mean GDP",label =  scales::dollar_format())+
+  theme_bw()+
+  theme(legend.position = "none")
+```
+
+*Figure 1.* The spread of GDP within the continents, as shown by plotting the mean GDP value for each country
+
+
+## What this figure/table show
+
+__Table 1__ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. __Figure 1__ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
+
+
+
+# Task option 5 - How is life expectancy changing over time on different continents
+## A tibble
+
+<!--This is very simple but contains everything I needed to make the plot-->
+*Table 2.* Life expectancy over time for each country
+
+```{r, echo=FALSE}
+(lifeExp <- gapminder %>% select(country,continent,lifeExp,year)) 
+```
+
+## A plot from the tibble
+
+<!--Geom_smooth fits a line between points (using the default method 'loess', which can be specified) and the grey area indicates 95% CI (can change this level)-->
+```{r, echo=FALSE, message=FALSE}
+ggplot(lifeExp, aes(year,lifeExp, group=continent)) + 
+  geom_smooth(aes(colour=continent)) + 
+  labs(x = "Year", y = "Life expectancy (years)", colour = "Continent")+
+  theme_bw()
+```
+
+*Figure 2.* Change in life expectancy over time for each continent
+
+## What this figure/table show
+
+__Table 2__ simply shows the life expectancy per year in each country. __Figure 2__ then plots this data, fitting a line through the countries within each continent (grey areas indicate 0.95 confidence level). In addition to showing the increasing trend of life expectancy over time in all continents, it indicates there is a clear difference between the life expectancies between continents.
+
+
+# Task option 6 - A country with an interesting story 
+
+## A tibble
+
+A few preliminary data exploration steps were taken to identify a country with an interesting story
+<!--To find a country with an interesting story I plotted the data first, then went on to make a tibble-->
+
+1. Plot all countries GDP per capita over time
+
+```{r}
+(ggplot(gapminder, aes(year, gdpPercap)) + geom_jitter()) #To quickly explore the dataframe. There are some clear outliers here
+```
+
+2. From the above graph, there are clearly some countries that are outliers, so to identify which country they represented I made the following tibble:
+
+```{r}
+gapminder %>% 
+    filter(gdpPercap > 75000) #Kuwait has the highest GDP per capita from 1952-1972, but happens after?
+```
+
+3. After identifying Kuwait as the outlier in the data, I filtered the gapminder dataframe down to the following tibble:
+
+```{r}
+(Kuwait <- gapminder %>%
+  filter(country == "Kuwait") %>%
+  select(-"lifeExp"))
+```
+
+## A plot from the tibble
+
+
+```{r, echo=FALSE}
+ggplot(Kuwait, aes(year, gdpPercap))+
+  geom_line()+
+  geom_point(aes(color = pop), size = 3)+
+  scale_y_continuous("GDP per capita", labels = scales::dollar_format())+
+  labs(x = "Year", color = "Population")+
+  theme_bw()
+```
+
+*Figure 3.* GDP per capita over and population change over time in Kuwait
+
+
+## What this figure/table show
+
+__Table 3__ shows population and GDP per capita over time for Kuwait. In preliminary data exploration, Kuwait was an outlier in global GDP per capita values when plotted over time, hence why it was chosen to be a country with an interesting story. GDP per capita for Kuwait was expectionally higher than other countries, especially from 1952-1972. __Figure 3__ goes on to plot the change in GDP per capita over time, which is characterised by large drop between 1972 and 1982. Over time population, which is indicated by colour, is increasing, following a general trend of decreasing GDP per capita, however this also follows a global trend of population increase over time. 
+
