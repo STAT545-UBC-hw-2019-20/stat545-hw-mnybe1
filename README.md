@@ -11,7 +11,7 @@
 
 - [x] Assignment 2
 
-- [x] [Assignment 3](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-mnybe1/tree/master/hw03/hw03_dplyrggplot.html)
+- [x] [Assignment 3](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-mnybe1/master/hw03/hw03_dplyrggplot.html)
 
 - [ ] Assignment 4
 
