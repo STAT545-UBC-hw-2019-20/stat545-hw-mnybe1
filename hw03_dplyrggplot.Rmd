@@ -1,20 +1,22 @@
 ---
-title: "HW03 - dplyr/ggplot II"
+title: "hw03 - dplyr/ggplot II"
 output: 
   html_document: default
 ---
 
 ```{r, echo=FALSE, message=FALSE}
+
 library(gapminder)
 library(tidyverse)
 ```
 
+
 # Task option 3 - The spread of GDP within the continents.
 ## A tibble
 
-*Table 1.* The spread of GDP within continents. For each country, the min, max, mean and the difference between the minimum and maxiumum values has been calculated
-
+*Table 1. The spread of GDP within continents. For each country, min, max, mean and the difference between the minimum and maxiumum values has been calculated*
 <!--Use summarise to calculate summary statistics, i.e. min, mean and max, and mutate to calculate a new variable that is the difference between the min and max GDP in each country-->
+
 ```{r, echo=FALSE}
 (GDP.tib <- gapminder %>% 
   select(gdpPercap, continent, country) %>%
@@ -57,6 +59,7 @@ __Table 1__ shows the spread of GDP within each continent. In addition to the me
 (lifeExp <- gapminder %>% select(country,continent,lifeExp,year)) 
 ```
 
+
 ## A plot from the tibble
 
 <!--Geom_smooth fits a line between points (using the default method 'loess', which can be specified) and the grey area indicates 95% CI (can change this level)-->
@@ -68,6 +71,7 @@ ggplot(lifeExp, aes(year,lifeExp, group=continent)) +
 ```
 
 *Figure 2.* Change in life expectancy over time for each continent
+
 
 ## What this figure/table show
 
@@ -102,8 +106,8 @@ gapminder %>%
   select(-"lifeExp"))
 ```
 
-## A plot from the tibble
 
+## A plot from the tibble
 
 ```{r, echo=FALSE}
 ggplot(Kuwait, aes(year, gdpPercap))+
@@ -120,4 +124,5 @@ ggplot(Kuwait, aes(year, gdpPercap))+
 ## What this figure/table show
 
 __Table 3__ shows population and GDP per capita over time for Kuwait. In preliminary data exploration, Kuwait was an outlier in global GDP per capita values when plotted over time, hence why it was chosen to be a country with an interesting story. GDP per capita for Kuwait was expectionally higher than other countries, especially from 1952-1972. __Figure 3__ goes on to plot the change in GDP per capita over time, which is characterised by large drop between 1972 and 1982. Over time population, which is indicated by colour, is increasing, following a general trend of decreasing GDP per capita, however this also follows a global trend of population increase over time. 
+
 
