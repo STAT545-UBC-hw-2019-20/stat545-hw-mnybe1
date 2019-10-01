@@ -10,62 +10,61 @@ library(tidyverse)
 
 ##Task option 3 - The spread of GDP within the continents.
 #A tibble
-<!-- -->
+Table 1
+<!--Use summarise to calculate summary statistics, i.e. min, mean and max, and mutate to calculate a new variable that is the difference between the min and max GDP in each country-->
 ```{r}
-gapminder %>%
+(GDP.tib <- gapminder %>% 
   select(gdpPercap, continent, country) %>%
-  group_by(country, continent) %>%
+  group_by(continent,country) %>%
   summarise(minGDP = min(gdpPercap),
             maxGDP = max(gdpPercap),
             meanGDP = mean(gdpPercap)) %>%
-  mutate(GDPdiff = maxGDP - minGDP)
+  mutate(GDPdiff = maxGDP - minGDP))
 
+```
+
+#A plot from the tibble
+The spread of GDP within the continents, as shown by plotting the mean GDP value for each country
+```{r}
+ggplot(GDP.tib, aes(continent, meanGDP))+
+  geom_jitter(aes(colour = continent))+
+  ggtitle("Spread of GDP within the continents")+
+  xlab("Continent")+
+  scale_y_continuous("Mean GDP",label =  scales::dollar_format())+
+  theme_bw()+
+  theme(legend.position = "none")
+```
+Figure 1
+
+#What this figure/table show
+_Table 1_ shows the spread of GDP within each continent. In addition to the mean, minimum and maximum values of GDP for each country, the difference between the minimum and maximum GDP has also been calculated. This can be used to identify countries where there is greater economic inequality, i.e. the difference between min and max GDP is greater. _Figure 1_ shows the spread of GDP within each continent by plotting the means of GDP per country. The most notable feature of this figure is the larger spread of GDP in Asia and Europe compared to Africa and the Americas. 
+
+##Task option 5 - How is life expectancy changing over time on different continents
+#A tibble
+<!-- -->
+```{r}
+(lifeExp <- gapminder %>% select(country,continent,lifeExp,year)) 
 ```
 
 #A plot from the tibble
 <!-- -->
 ```{r}
-gapminder %>%
-  select(gdpPercap, continent, country) %>%
-  group_by(country, continent) %>%
-  summarise(minGDP = min(gdpPercap),
-            maxGDP = max(gdpPercap),
-            meanGDP = mean(gdpPercap)) %>%
-  mutate(GDPdiff = maxGDP - minGDP) %>%
-  ggplot(., aes(meanGDP, continent))+
-  ggridges::geom_density_ridges()
-
-```
-
-#What this figure/table show
-<!-- -->
-The table/figure show the difference in max and min GDP for countries in each country. 
-
-##Task option 5
-#A tibble
-<!-- -->
-```{r}
-
-```
-
-#A plot from the tibble
-<!-- -->
-```{r}
-
+ggplot(lifeExp, aes(year,lifeExp, group=continent)) + geom_smooth(aes(color=continent)) + theme_bw()
 ```
 
 #What this figure/table show
 <!-- -->
 ```{r}
-
+gapmin
 ```
 
 
-##Task option 6
+##Task option 6 - A country with an interesting story 
 #A tibble
 <!-- -->
 ```{r}
-
+ggplot(gapminder, aes(year, pop,group=continent)) + geom_jitter()
+gapminder %>% filter(pop>250000000)
 ```
 
 #A plot from the tibble
