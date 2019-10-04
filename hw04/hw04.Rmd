@@ -1,5 +1,4 @@
 ---
-<<<<<<< HEAD
 title: "hw04: Tidy data and joins"
 output: html_document
 ---
@@ -19,26 +18,33 @@ library(tidyverse)
 
 ### A tibble
 #### 1. Make a tibble with one row per year, and columns for life expectancy for two or more countries.
+<!-- Need to select and filter before widening the dataframe --> 
 ```{r}
-gapminder %>% 
+(LifeE.AJ<- gapminder %>% 
   select(country, lifeExp, year) %>%
   filter(country == "Australia" | country == "Japan") %>%
   pivot_wider(id_cols = year,
               names_from = country,
-              values_from = lifeExp)
-  
+              values_from = lifeExp))
+
 ```
 
 
-### A scatter plot
+### A scatter plot of the life expectancy of Japan against Australia
 ```{r}
-
+ggplot(data = LifeE.AJ, aes(Australia, Japan))+
+  geom_point()+
+  theme_bw()
 ```
+#### Figure 1. Life expectancy of Japan against Australia. 
 
 
 ### Re-lengthen the data
 ```{r}
-
+LifeE.AJ %>%
+  pivot_longer(cols = c(Australia, Japan),
+               names_to = "country",
+               values_to = "lifeExp")
 ```
 
 
@@ -53,11 +59,3 @@ gapminder %>%
 
 # Ex3. Table joins
 
-
-
-=======
-title: "hw04"
-output: html_document
----
-
->>>>>>> 9aa586b02ef97a9ac9249ec6dd836880500ad18e
