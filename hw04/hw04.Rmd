@@ -10,17 +10,12 @@ library(tidyverse)
 
 
 # Ex1. Univariate data reshaping
-## Option 1 - Exploring life expectancy for ...
-### 3 components of the task:
-### 1. Putting the data in wider format
-### 2. Producing a plot of the wide data
-### 3. Re-lengthening the wide data
-
+## Option 1 - Exploring life expectancy for Australia and Japan
 ### A tibble
 #### 1. Make a tibble with one row per year, and columns for life expectancy for two or more countries.
 <!-- Need to select and filter before widening the dataframe --> 
 ```{r}
-(LifeE.AJ<- gapminder %>% 
+(Ex1<- gapminder %>% 
   select(country, lifeExp, year) %>%
   filter(country == "Australia" | country == "Japan") %>%
   pivot_wider(id_cols = year,
@@ -32,8 +27,9 @@ library(tidyverse)
 
 ### A scatter plot of the life expectancy of Japan against Australia
 ```{r}
-ggplot(data = LifeE.AJ, aes(Australia, Japan))+
+ggplot(Ex1, aes(Australia, Japan))+
   geom_point()+
+  ggtitle("Life expectancy for Japan and Australia")+
   theme_bw()
 ```
 #### Figure 1. Life expectancy of Japan against Australia. 
@@ -41,7 +37,7 @@ ggplot(data = LifeE.AJ, aes(Australia, Japan))+
 
 ### Re-lengthen the data
 ```{r}
-LifeE.AJ %>%
+Ex1 %>%
   pivot_longer(cols = c(Australia, Japan),
                names_to = "country",
                values_to = "lifeExp")
@@ -49,9 +45,17 @@ LifeE.AJ %>%
 
 
 # Ex2. Multivariate data re-shaping
-## Option 2
-
+## Option 1
 ### A tibble
+```{r}
+(Ex2<- gapminder %>% 
+  select(country, lifeExp, year, gdpPercap) %>%
+   filter(country == "Australia" | country == "Japan")) %>%
+  pivot_wider(id_cols = year,
+              names_from = c(country),
+              names_sep = "_",
+              values_from = c("lifeExp", "gdpPercap"))
+```
 
 
 ### Re-lengthen the data
