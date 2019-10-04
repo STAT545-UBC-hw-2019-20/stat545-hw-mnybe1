@@ -79,13 +79,22 @@ email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/maste
   separate_rows(guest, sep = ", ") %>%
    rename(name = guest))
 
-guest %>%
+email.guest <- guest %>%
   left_join(email.long, by = "name")
 ```
 
 
 ## 3.2 Who do we have emails for, yet are not on the guestlist?
-
+```{r}
+email.long %>%
+  anti_join(guest)
+```
 
 
 ## 3.3 Make a guestlist that includes everyone we have emails for (in addition to those on the original guestlist).
+<!-- So here we want to drop the guests that we don't have e-mails for (from guest) and add the guests from ex 3.2. Get r -->
+```{r}
+email.long %>%
+  right_join(email.guest, by = "email")
+```
+
