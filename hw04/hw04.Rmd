@@ -50,6 +50,7 @@ Ex1 %>%
 ```{r}
 (Ex2<- gapminder %>% 
   select(country, lifeExp, year, gdpPercap) %>%
+<<<<<<< HEAD
    filter(country == "Australia" | country == "Japan") %>%
   pivot_wider(id_cols = year,
               names_from = c(country),
@@ -57,6 +58,13 @@ Ex1 %>%
               values_from = c("lifeExp", "gdpPercap")))
 
 Ex2
+=======
+   filter(country == "Australia" | country == "Japan")) %>%
+  pivot_wider(id_cols = year,
+              names_from = c(country),
+              names_sep = "_",
+              values_from = c("lifeExp", "gdpPercap"))
+>>>>>>> cc198d030f31bb60289747a7518cec95b92d8d30
 ```
 
 
