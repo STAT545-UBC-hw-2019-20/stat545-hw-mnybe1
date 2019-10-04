@@ -1,0 +1,56 @@
+---
+title: "hw04: Tidy data and joins"
+output: html_document
+---
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+
+# Ex1. Univariate data reshaping
+## Option 1 - Exploring life expectancy for ...
+### 3 components of the task:
+### 1. Putting the data in wider format
+### 2. Producing a plot of the wide data
+### 3. Re-lengthening the wide data
+
+### A tibble
+#### 1. Make a tibble with one row per year, and columns for life expectancy for two or more countries.
+```{r}
+gapminder %>% 
+  select(country, lifeExp, year) %>%
+  filter(country == "Australia" | country == "Japan") %>%
+  pivot_wider(id_cols = year,
+              names_from = country,
+              values_from = lifeExp)
+  
+```
+
+
+### A scatter plot
+```{r}
+
+```
+
+
+### Re-lengthen the data
+```{r}
+
+```
+
+
+# Ex2. Multivariate data re-shaping
+## Option 2
+
+### A tibble
+
+
+### Re-lengthen the data
+
+
+# Ex3. Table joins
+
+
+
