@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "hw04: Tidy data and joins"
 output: html_document
 ---
@@ -54,3 +55,9 @@ gapminder %>%
 
 
 
+=======
+title: "hw04"
+output: html_document
+---
+
+>>>>>>> 9aa586b02ef97a9ac9249ec6dd836880500ad18e
