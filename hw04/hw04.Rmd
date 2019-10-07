@@ -55,6 +55,7 @@ Ex1 %>%
               names_from = c(country),
               names_sep = "_",
               values_from = c("lifeExp", "gdpPercap")))
+
 ```
 
 
@@ -92,9 +93,11 @@ email.long %>%
 
 
 ## 3.3 Make a guestlist that includes everyone we have emails for (in addition to those on the original guestlist).
-<!-- So here we want to drop the guests that we don't have e-mails for (from guest) and add the guests from ex 3.2. Get r -->
+This is a list that is essentially 
+<!-- So here we want to drop the guests that we don't have e-mails for (from guest) and add the guests from ex 3.2. Get r
+just justify whatever you do!  full join-->
 ```{r}
-email.long %>%
-  right_join(email.guest, by = "email")
+(full.list <- guest %>%
+  full_join(email.long))
 ```
 
