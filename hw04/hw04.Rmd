@@ -3,6 +3,7 @@ title: "hw04: Tidy data and joins"
 output: html_document
 ---
 
+Load the required packages:
 ```{r}
 library(gapminder)
 library(tidyverse)
@@ -11,8 +12,7 @@ library(tidyverse)
 
 # Ex1. Univariate data reshaping
 ## Option 1 - Exploring life expectancy for Australia and Japan
-### A tibble
-#### 1. Make a tibble with one row per year, and columns for life expectancy for two or more countries.
+### A tibble with one row per year, and columns for life expectancy for two or more countries.
 <!-- Need to select and filter before widening the dataframe --> 
 ```{r}
 (Ex1<- gapminder %>% 
@@ -32,7 +32,7 @@ ggplot(Ex1, aes(Australia, Japan))+
   ggtitle("Life expectancy for Japan and Australia")+
   theme_bw()
 ```
-#### Figure 1. Life expectancy of Japan against Australia. 
+#### *Figure 1. Life expectancy of Japan against Australia.* 
 
 
 ### Re-lengthen the data
@@ -46,44 +46,16 @@ Ex1 %>%
 
 # Ex2. Multivariate data re-shaping
 ## Option 1
-### A tibble
+### A tibble for the life expectancy and GDP per capita for Australia and Japan
 ```{r}
 (Ex2<- gapminder %>% 
   select(country, lifeExp, year, gdpPercap) %>%
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> f4ea0c7ff2d174af441007e5be2f400960a9837a
->>>>>>> 8177ca29fd8f855f62dc99c1878a7292fa4b37c4
->>>>>>> 068df1c31336dbcaade8b1ad929226c79ebcde54
    filter(country == "Australia" | country == "Japan") %>%
   pivot_wider(id_cols = year,
               names_from = c(country),
               names_sep = "_",
               values_from = c("lifeExp", "gdpPercap")))
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
-Ex2
-=======
-   filter(country == "Australia" | country == "Japan")) %>%
-  pivot_wider(id_cols = year,
-              names_from = c(country),
-              names_sep = "_",
-              values_from = c("lifeExp", "gdpPercap"))
->>>>>>> cc198d030f31bb60289747a7518cec95b92d8d30
->>>>>>> f4ea0c7ff2d174af441007e5be2f400960a9837a
->>>>>>> 8177ca29fd8f855f62dc99c1878a7292fa4b37c4
->>>>>>> 068df1c31336dbcaade8b1ad929226c79ebcde54
 ```
 
 
@@ -98,18 +70,21 @@ Ex2 %>%
 
 
 # Ex3. Table joins
+First read in the data from github
 ```{r}
 guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
 email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
 ```
+
 ## 3.1 For each guest in the guestlist (guest tibble), add a column for email address, which can be found in the email tibble.
+First I created an object that is the email list in long format, with only one observation (name) per e-mail. The object 'email.guest' is then created by joining the guest list with the email list by name.
 ```{r}
 (email.long <- email %>% 
   separate_rows(guest, sep = ", ") %>%
    rename(name = guest))
 
-email.guest <- guest %>%
-  left_join(email.long, by = "name")
+(email.guest <- guest %>%
+  left_join(email.long, by = "name"))
 ```
 
 
@@ -121,9 +96,8 @@ email.long %>%
 
 
 ## 3.3 Make a guestlist that includes everyone we have emails for (in addition to those on the original guestlist).
-This is a list that is essentially 
-<!-- So here we want to drop the guests that we don't have e-mails for (from guest) and add the guests from ex 3.2. Get r
-just justify whatever you do!  full join-->
+This is a list that is a full guestlist of everyone there are emails for. I joined the email.long dataframe with the guest dataframe so that everyone we have emails is included. 
+<!--Use full join for complete list (EVERYONE!)-->
 ```{r}
 (full.list <- guest %>%
   full_join(email.long))
