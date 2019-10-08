@@ -50,12 +50,40 @@ Ex1 %>%
 ```{r}
 (Ex2<- gapminder %>% 
   select(country, lifeExp, year, gdpPercap) %>%
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f4ea0c7ff2d174af441007e5be2f400960a9837a
+>>>>>>> 8177ca29fd8f855f62dc99c1878a7292fa4b37c4
+>>>>>>> 068df1c31336dbcaade8b1ad929226c79ebcde54
    filter(country == "Australia" | country == "Japan") %>%
   pivot_wider(id_cols = year,
               names_from = c(country),
               names_sep = "_",
               values_from = c("lifeExp", "gdpPercap")))
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+Ex2
+=======
+   filter(country == "Australia" | country == "Japan")) %>%
+  pivot_wider(id_cols = year,
+              names_from = c(country),
+              names_sep = "_",
+              values_from = c("lifeExp", "gdpPercap"))
+>>>>>>> cc198d030f31bb60289747a7518cec95b92d8d30
+>>>>>>> f4ea0c7ff2d174af441007e5be2f400960a9837a
+>>>>>>> 8177ca29fd8f855f62dc99c1878a7292fa4b37c4
+>>>>>>> 068df1c31336dbcaade8b1ad929226c79ebcde54
 ```
 
 
