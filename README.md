@@ -15,7 +15,7 @@
 
 - [x] [Assignment 4](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-mnybe1/hw04/hw04.html)
 
-- [ ] Assignment 5
+- [x] [Assignment 5](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-mnybe1/hw05/hw05.html)
 
 ## Class guide
 ### *Links to participation repository*
